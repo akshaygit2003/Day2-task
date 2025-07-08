@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Holy Grail Layout - Flexbox & Grid</title>
+    <style>
+      /* Common Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        color: #333;
+        min-height: 100vh;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header,
+      footer,
+      nav,
+      main,
+      aside {
+        padding: 20px;
+      }
+
+      header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      footer {
+        background-color: #f8f9fa;
+        border-top: 1px solid #e9ecef;
+        text-align: center;
+      }
+
+      nav {
+        background-color: #e9ecef;
+      }
+
+      aside {
+        background-color: #e9ecef;
+      }
+
+      main {
+        background-color: white;
+      }
+
+      h1 {
+        margin-bottom: 15px;
+      }
+
+      p {
+        margin-bottom: 15px;
+      }
+
+      .tabs {
+        display: flex;
+        background-color: #333;
+        margin-bottom: 20px;
+      }
+
+      .tab {
+        padding: 10px 20px;
+        color: white;
+        cursor: pointer;
+        background-color: #555;
+      }
+
+      .tab.active {
+        background-color: #007bff;
+      }
+
+      .layout {
+        display: none;
+        min-height: calc(100vh - 114px); /* Adjusted for tabs and margin */
+      }
+
+      .layout.active {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Flexbox Layout */
+      .flexbox-layout .holy-grail {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+      }
+
+      .flexbox-layout .main-container {
+        display: flex;
+        flex: 1;
+      }
+
+      .flexbox-layout main {
+        flex: 3;
+        order: 2;
+      }
+
+      .flexbox-layout nav {
+        flex: 1;
+        order: 1;
+      }
+
+      .flexbox-layout aside {
+        flex: 1;
+        order: 3;
+      }
+
+      /* Grid Layout */
+      .grid-layout .holy-grail {
+        display: grid;
+        grid-template-areas:
+          "header header header"
+          "nav main aside"
+          "footer footer footer";
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-rows: auto 1fr auto;
+        min-height: 100%;
+      }
+
+      .grid-layout header {
+        grid-area: header;
+      }
+
+      .grid-layout nav {
+        grid-area: nav;
+      }
+
+      .grid-layout main {
+        grid-area: main;
+      }
+
+      .grid-layout aside {
+        grid-area: aside;
+      }
+
+      .grid-layout footer {
+        grid-area: footer;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        /* Flexbox Responsive */
+        .flexbox-layout .main-container {
+          flex-direction: column;
+        }
+
+        .flexbox-layout nav,
+        .flexbox-layout aside,
+        .flexbox-layout main {
+          order: 0;
+        }
+
+        /* Grid Responsive */
+        .grid-layout .holy-grail {
+          grid-template-areas:
+            "header"
+            "nav"
+            "main"
+            "aside"
+            "footer";
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto 1fr auto auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="tabs">
+        <div class="tab active" onclick="switchLayout('flexbox')">
+          Flexbox Layout
+        </div>
+        <div class="tab" onclick="switchLayout('grid')">Grid Layout</div>
+      </div>
+
+      <!-- Flexbox Layout -->
+      <div class="layout flexbox-layout active">
+        <div class="holy-grail">
+          <header>
+            <h1>Holy Grail Layout - Flexbox</h1>
+            <p>This is a classic layout implemented with CSS Flexbox.</p>
+          </header>
+
+          <div class="main-container">
+            <nav>
+              <h2>Navigation</h2>
+              <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </nav>
+
+            <main>
+              <h2>Main Content</h2>
+              <p>
+                This is the main content area. The Holy Grail layout is a page
+                layout pattern that's been used in web design for many years.
+                The layout consists of a header, footer, and three columns. The
+                center column contains the main content, and the left and right
+                columns typically contain navigation and ads, respectively.
+              </p>
+              <p>
+                This version uses CSS Flexbox to achieve the layout. Flexbox is
+                a one-dimensional layout method designed to organize items in
+                rows or columns. Items flex to fill space or shrink to prevent
+                overflow.
+              </p>
+              <p>
+                Resize the window to see how the layout responds to different
+                screen sizes.
+              </p>
+            </main>
+
+            <aside>
+              <h2>Sidebar</h2>
+              <p>
+                This is the sidebar, which might contain ads, related links, or
+                supplementary content.
+              </p>
+            </aside>
+          </div>
+
+          <footer>
+            <p>&copy; 2025 Holy Grail Layout Example</p>
+          </footer>
+        </div>
+      </div>
+
+      <!-- Grid Layout -->
+      <div class="layout grid-layout">
+        <div class="holy-grail">
+          <header>
+            <h1>Holy Grail Layout - Grid</h1>
+            <p>This is a classic layout implemented with CSS Grid.</p>
+          </header>
+
+          <nav>
+            <h2>Navigation</h2>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+
+          <main>
+            <h2>Main Content</h2>
+            <p>
+              This is the main content area. The Holy Grail layout is a page
+              layout pattern that's been used in web design for many years. The
+              layout consists of a header, footer, and three columns. The center
+              column contains the main content, and the left and right columns
+              typically contain navigation and ads, respectively.
+            </p>
+            <p>
+              This version uses CSS Grid to achieve the layout. Grid is a
+              two-dimensional layout system that allows for precise control of
+              rows and columns simultaneously, making complex layouts simpler to
+              implement.
+            </p>
+            <p>
+              Resize the window to see how the layout responds to different
+              screen sizes.
+            </p>
+          </main>
+
+          <aside>
+            <h2>Sidebar</h2>
+            <p>
+              This is the sidebar, which might contain ads, related links, or
+              supplementary content.
+            </p>
+          </aside>
+
+          <footer>
+            <p>&copy; 2025 Holy Grail Layout Example</p>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function switchLayout(layout) {
+        // Hide all layouts
+        document.querySelectorAll(".layout").forEach((el) => {
+          el.classList.remove("active");
+        });
+
+        // Show selected layout
+        document
+          .querySelector("." + layout + "-layout")
+          .classList.add("active");
+
+        // Update tab styling
+        document.querySelectorAll(".tab").forEach((tab) => {
+          tab.classList.remove("active");
+        });
+
+        // Find the clicked tab by checking if its onclick contains the layout name
+        document.querySelectorAll(".tab").forEach((tab) => {
+          if (tab.getAttribute("onclick").includes(layout)) {
+            tab.classList.add("active");
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
